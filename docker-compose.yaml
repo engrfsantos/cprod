@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  app:
+    container_name: cprod
+    image: naldfranc/cprod:1.0
+    build: 
+      context: CPROD/app
+      dockerfile: Dockerfile
+    volumes:
+      - /CPROD:/CPROD
+    ports:
+      - 8000:8000
+      - 8080:8080
+      - 5441:5441
+    working_dir: /CPROD
