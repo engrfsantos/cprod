@@ -2,7 +2,7 @@
 
 PS> docker build . -t naldfranc/cprod:1.0
 
-PS> docker run -v .:/CPROD --name cprod naldfranc/cprod:1.0
+PS> docker run -d -p 8000:8000 -v .:/CPROD --name cprod naldfranc/cprod:1.0
 
 Abrir um terminal dentro do docker iniciado
 

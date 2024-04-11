@@ -11,6 +11,5 @@ services:
       - /CPROD:/CPROD
     ports:
       - 8000:8000
-      - 8080:8080
       - 5441:5441
     working_dir: /CPROD
