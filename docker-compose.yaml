@@ -5,11 +5,11 @@ services:
     container_name: cprod
     image: naldfranc/cprod:1.0
     build: 
-      context: CPROD/app
+      context: cprod
       dockerfile: Dockerfile
     volumes:
-      - /CPROD:/CPROD
+      - /cprod:/cprod
     ports:
       - 8000:8000
       - 5441:5441
-    working_dir: /CPROD
+    working_dir: /cprod

@@ -1,5 +1,37 @@
 from pydantic import BaseModel
 
+from datetime import datetime
+
+class ProducaoBase(BaseModel):
+    id : int
+    leitura : str
+    produto_id : str | None = None
+    descricao : str
+    status_id : int
+    local_id : str
+    dt : datetime.date
+    hr : datetime.hour
+    serie : str
+    user_id : int
+    setor_id : str
+    os_id : int | None = None
+    
+    
+class ProducaoCreate(ProducaoBase):
+    pass
+
+class Producao(ProducaoBase):
+    id : int
+    produto_id : str | None = None
+    status_id : int
+    local_id : str
+    user_id : int
+    setor_id : str
+    os_id : int | None = None
+
+    class Config:
+        orm_mode = True
+
 class ItemBase(BaseModel):
     title: str
     description: str | None = None

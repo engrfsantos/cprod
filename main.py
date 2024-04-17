@@ -12,8 +12,9 @@ def create_db_and_tables():
     database.Base.metadata.create_all(database.engine)
 
 if __name__ == "__main__":
-    print("Criou as tabelas")
+    print("Tentando criar as tabelas")
     create_db_and_tables()
+    print("Criou as tabelas")
 
 # Dependency
 def get_db():
@@ -23,6 +24,25 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+
+@app.get("/producao/", response_model=list[schemas.Producao])
+def read_producaos(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    producoes = crud.get_producaos(db, skip=skip, limit=limit)
+    return producoes
+
+
+@app.get("/producao/{producao_id}", response_model=schemas.Producao)
+def read_producao(producao_id: int, db: Session = Depends(get_db)):
+    db_producao = crud.get_producao(db, user_id=producao_id)
+    if db_producao is None:
+        raise HTTPException(status_code=404, detail="Produção não encontrada")
+    return db_producao
+
+
+
+
 
 @app.post("/users/", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):

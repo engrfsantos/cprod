@@ -2,7 +2,10 @@
 
 PS> docker build . -t naldfranc/cprod:1.0
 
-PS> docker run -d -p 8000:8000 -v .:/CPROD --name cprod naldfranc/cprod:1.0
+PS> docker run --network=bridge -d -p 8000:8000 -p 5441:5441 -v .:/CPROD --name cprod naldfranc/cprod:1.0
+PS> docker run --network=host -d -p 8000:8000 -p 5441:5441 -v .:/CPROD --name cprod naldfranc/cprod:1.0
+
+PS> docker-compose -up
 
 Abrir um terminal dentro do docker iniciado
 
@@ -15,7 +18,8 @@ python -m venv ./venv
 ```
 Para ativar o ambiente virtual
 ```
-source venv/bin/activate
+# source venv/bin/activate
+c:\> venv/Scripts/Activate.ps1
 ```
 
 #Instalar os pacotes um a um
