@@ -1,5 +1,5 @@
+import time
 from pydantic import BaseModel
-
 from datetime import datetime
 
 class ProducaoBase(BaseModel):
@@ -9,8 +9,8 @@ class ProducaoBase(BaseModel):
     descricao : str
     status_id : int
     local_id : str
-    dt : datetime.date
-    hr : datetime.hour
+    dt : datetime
+    hr : time
     serie : str
     user_id : int
     setor_id : str
