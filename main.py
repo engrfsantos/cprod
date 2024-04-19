@@ -41,7 +41,30 @@ def read_producao(producao_id: int, db: Session = Depends(get_db)):
     return db_producao
 
 
+@app.get("/setor/", response_model=list[schemas.Setor])
+def read_setors(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    setors = crud.get_setors(db, skip=skip, limit=limit)
+    return setors
 
+
+@app.get("/setor/{setor_id}", response_model=schemas.Setor)
+def read_setor(setor_id: str, db: Session = Depends(get_db)):
+    db_setor = crud.get_setor(db, setor_id=setor_id)
+    if db_setor is None:
+        raise HTTPException(status_code=404, detail="Setor não encontrado")
+    return db_setor
+
+@app.get("/proddefeito/", response_model=list[schemas.ProdDefeito])
+def read_proddefeitos(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    proddefeitos = crud.get_proddefeitos(db, skip=skip, limit=limit)
+    return proddefeitos
+
+@app.get("/proddefeito/{proddefeito_id}", response_model=schemas.ProdDefeito)
+def read_proddefeito(proddefeito_id: int, db: Session = Depends(get_db)):
+    db_proddefeito = crud.get_proddefeito(db, proddefeito_id=proddefeito_id)
+    if db_proddefeito is None:
+        raise HTTPException(status_code=404, detail="Setor não encontrado")
+    return db_proddefeito
 
 
 @app.post("/users/", response_model=schemas.User)

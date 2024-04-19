@@ -1,6 +1,7 @@
 import time
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import time, timedelta
+from datetime import date
 
 class ProducaoBase(BaseModel):
     id : int
@@ -9,13 +10,12 @@ class ProducaoBase(BaseModel):
     descricao : str
     status_id : int
     local_id : str
-    dt : datetime
+    dt : date
     hr : time
     serie : str
     user_id : int
     setor_id : str
-    os_id : int | None = None
-    
+    os_id : int | None = None  
     
 class ProducaoCreate(ProducaoBase):
     pass
@@ -31,6 +31,64 @@ class Producao(ProducaoBase):
 
     class Config:
         orm_mode = True
+
+
+class SetorBase(BaseModel):
+    id : str
+    desc_breve : str 
+    descricao : str | None = None
+    status_id : str | None = None
+    local_id : str | None = None
+    reparo : bool | None = None
+    autoconfrede : bool | None = None
+    burnin : bool | None = None
+    fechaos : str | None = None
+    obrpn : bool | None = None
+    tipoid : str  | None = None
+    
+class SetorCreate(SetorBase):
+    pass
+
+class Setor(SetorBase):
+    id : str
+    desc_breve : str
+    descricao : str 
+
+    class Config:
+        orm_mode = True
+
+
+class ProdDefeitoBase(BaseModel):
+    id : int
+    obs : str 
+    acao : str | None = None
+    status_id : int | None = None
+    dt : date | None = None
+    hr1 : time | None = None
+    defeito : str | None = None
+    hr1 : timedelta | None = None
+    producao_id : int | None = None
+    defeito_id : int | None = None
+    timestamp : time | None = None
+    bipagem : str  | None = None
+    grupo_defeito_id: int 
+    
+class ProdDefeitoCreate(ProdDefeitoBase):
+    pass
+
+class ProdDefeito(ProdDefeitoBase):
+    id : int
+    obs : str | None = None
+    acao : str | None = None
+    status_id : int | None = None
+    producao_id : int | None = None
+    defeito_id : int | None = None
+    bipagem : str  | None = None
+    grupo_defeito_id: int | None = None
+  
+    class Config:
+        orm_mode = True
+
 
 class ItemBase(BaseModel):
     title: str

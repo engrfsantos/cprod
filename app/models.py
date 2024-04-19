@@ -31,7 +31,7 @@ class Producao(Base):
 
 class Setor(Base):
     __tablename__ = "td01_identificador"
-    id: int = Column("td01_id",String, primary_key=True, nullable=False) #td01_id character varying(6) COLLATE pg_catalog."default" NOT NULL,
+    id: str = Column("td01_id",String, primary_key=True, nullable=False) #td01_id character varying(6) COLLATE pg_catalog."default" NOT NULL,
     desc_breve: str = Column("td01_desc_breve", String) #td01_desc_breve character varying(10) COLLATE pg_catalog."default" NOT NULL,
     descricao: str = Column("td01_descricao",String) #td01_descricao character varying(50) COLLATE pg_catalog."default",
     status_id: str = Column("td01_status",String) #td01_status character varying(2) COLLATE pg_catalog."default",
@@ -42,6 +42,22 @@ class Setor(Base):
     fechaos: str = Column("td01_fechaos",String) # td01_fechaos character varying(1) COLLATE pg_catalog."default" DEFAULT 0,
     obrpn: bool = Column("td01_obrpn",Boolean) # td01_obrpn boolean,
     tipoid: str = Column("td01_tipoid",String) # td01_tipoid character varying(8) COLLATE pg_catalog."default" DEFAULT 0,
+ 
+class ProdDefeito(Base):
+    __tablename__ = "td01_prod_defeito"
+    id: int = Column("td01_prod_defeito_id",String, primary_key=True, nullable=False) 
+    obs: str = Column("td01_analise", String) 
+    acao: str = Column("td01_reparo",String)
+    status_id: int = Column("td01_status",Integer)
+    dt: datetime =  Column("td01_dt",DateTime, default=datetime.date)
+    hr1: time = Column("td01_hr1",Time)
+    serie: str = Column("td01_serie", String)
+    hr: time = Column("td01_hr",Time)
+    producao_id: int = Column("td01_producao_id", Integer)
+    defeito_id: int = Column("td01_defeito_id", Integer)
+    timestamp: time = Column("td01_timestamp", Time)
+    bipagem: str = Column("td01_bipagem", String)
+    grupo_defeito_id: int = Column("td01_grupo_defeito_id", Integer)
  
   
 class Post(Base):
