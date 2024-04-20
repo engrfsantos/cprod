@@ -33,7 +33,7 @@ class Producao(ProducaoBase):
         orm_mode = True
 
 
-class SetorBase(BaseModel):
+class ProcessoBase(BaseModel):
     id : str
     desc_breve : str 
     descricao : str | None = None
@@ -46,10 +46,10 @@ class SetorBase(BaseModel):
     obrpn : bool | None = None
     tipoid : str  | None = None
     
-class SetorCreate(SetorBase):
+class ProcessoCreate(ProcessoBase):
     pass
 
-class Setor(SetorBase):
+class Processo(ProcessoBase):
     id : str
     desc_breve : str
     descricao : str 
@@ -57,6 +57,25 @@ class Setor(SetorBase):
     class Config:
         orm_mode = True
 
+
+class DefeitoBase(BaseModel):
+    id: int
+    descricao: str 
+    ean: str  | None = None
+    grupo_id: str | None = None
+    codigo_id: str | None = None
+    agrupar: str | None = None
+    categoria: str | None = None
+
+class DefeitoCreate(DefeitoBase):
+    pass
+
+class Defeito(DefeitoBase):
+    id: int 
+    descricao: str
+    
+    class Config:
+        orm_mode = True
 
 class ProdDefeitoBase(BaseModel):
     id : int
@@ -88,6 +107,30 @@ class ProdDefeito(ProdDefeitoBase):
   
     class Config:
         orm_mode = True
+
+
+class StatusBase(BaseModel):
+    id : int
+    desc_breve : str | None = None 
+    descricao : str | None = None
+    
+class StatusCreate(StatusBase):
+    pass
+
+class Status(StatusBase):
+    id : int
+    desc_breve : str | None = None
+    descricao : str | None = None
+    
+    class Config:
+        orm_mode = True
+
+
+
+
+
+
+
 
 
 class ItemBase(BaseModel):

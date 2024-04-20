@@ -8,17 +8,30 @@ def get_producao(db: Session, producao_id: int):
 def get_producaos(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Producao).offset(skip).limit(limit).all()
 
-def get_setor(db: Session, setor_id: str):
-    return db.query(models.Setor).filter(models.Setor.id == setor_id).first()
+def get_processo(db: Session, processo_id: str, local_id: str):
+    return db.query(models.Processo).filter(models.Processo.id == processo_id, models.Processo.local_id==local_id).first()
 
-def get_setors(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Setor).offset(skip).limit(limit).all()
+def get_processos(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Processo).offset(skip).limit(limit).all()
+
+def get_defeito(db: Session, defeito_id: id):
+    return db.query(models.Defeito).filter(models.Defeito.id == defeito_id).first()
+
+def get_defeitos(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Defeito).offset(skip).limit(limit).all()
 
 def get_proddefeito(db: Session, proddefeito_id: id):
     return db.query(models.ProdDefeito).filter(models.ProdDefeito.id == proddefeito_id).first()
 
 def get_proddefeitos(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.ProdDefeito).offset(skip).limit(limit).all()
+
+def get_status(db: Session, status_id: str):
+    return db.query(models.Status).filter(models.Status.id == status_id).first()
+
+def get_statuss(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Status).offset(skip).limit(limit).all()
+
 
 
 def get_user(db: Session, user_id: int):

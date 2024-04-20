@@ -21,7 +21,7 @@ class Producao(Base):
     produto_id: str = Column("td01_cod_produto",String, ForeignKey("produto.id"))
     descricao: str = Column("td01_descricao",String)
     status_id: int = Column("td01_status",Integer, ForeignKey("statuss.id"))
-    local_id: str = Column("td01_id",String, ForeignKey("locais.id"))
+    processo_id: str = Column("td01_id",String, ForeignKey("locais.id"))
     dt: datetime =  Column("td01_dt",DateTime, default=datetime.date)
     hr: time = Column("td01_hr",Time)
     serie: int = Column("td01_serie",Integer)
@@ -29,7 +29,13 @@ class Producao(Base):
     setor_id: str = Column("td01_local",String, ForeignKey("setors.id"))
     os_id: int = Column("td01_os",Integer, ForeignKey("oss.id"))
 
-class Setor(Base):
+class Status(Base):
+    __tablename__ = "ts01_status"
+    id: int = Column("ts01_status", Integer, primary_key=True, nullable=False)
+    desc_breve: str = Column("ts01_desc_breve", String,nullable=False)
+    descricao: str = Column("ts01_descricao", String,nullable=False)
+
+class Processo(Base):
     __tablename__ = "td01_identificador"
     id: str = Column("td01_id",String, primary_key=True, nullable=False) #td01_id character varying(6) COLLATE pg_catalog."default" NOT NULL,
     desc_breve: str = Column("td01_desc_breve", String) #td01_desc_breve character varying(10) COLLATE pg_catalog."default" NOT NULL,
@@ -42,10 +48,20 @@ class Setor(Base):
     fechaos: str = Column("td01_fechaos",String) # td01_fechaos character varying(1) COLLATE pg_catalog."default" DEFAULT 0,
     obrpn: bool = Column("td01_obrpn",Boolean) # td01_obrpn boolean,
     tipoid: str = Column("td01_tipoid",String) # td01_tipoid character varying(8) COLLATE pg_catalog."default" DEFAULT 0,
- 
+
+class Defeito(Base):
+    __tablename__ = "td01_defeito"
+    id: int = Column("td01_defeito_id", Integer, primary_key=True, nullable=False)
+    descricao: str = Column("td01_descricao", String, nullable=False)
+    ean: str = Column("td01_ean", String)
+    grupo_id: str = Column("td01_grupo", String)
+    codigo_id: str = Column("td01_codigo", String)
+    agrupar: str = Column("td01_agrupar", String)
+    categoria: str = Column("td01_categoria", String, nullable=False, default="Geral")
+    
 class ProdDefeito(Base):
     __tablename__ = "td01_prod_defeito"
-    id: int = Column("td01_prod_defeito_id",String, primary_key=True, nullable=False) 
+    id: int = Column("td01_prod_defeito_id",Integer, primary_key=True, nullable=False) 
     obs: str = Column("td01_analise", String) 
     acao: str = Column("td01_reparo",String)
     status_id: int = Column("td01_status",Integer)
