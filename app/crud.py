@@ -9,6 +9,7 @@ def get_producaos(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Producao).offset(skip).limit(limit).all()
 
 def get_processo(db: Session, processo_id: str, local_id: str):
+    print("Processo", processo_id, "Local", local_id)
     return db.query(models.Processo).filter(models.Processo.id == processo_id, models.Processo.local_id==local_id).first()
 
 def get_processos(db: Session, skip: int = 0, limit: int = 100):
@@ -32,6 +33,11 @@ def get_status(db: Session, status_id: str):
 def get_statuss(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Status).offset(skip).limit(limit).all()
 
+def get_produto(db: Session, produto_id: str):
+    return db.query(models.Produto).filter(models.Produto.id == produto_id).first()
+
+def get_produtos(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Produto).offset(skip).limit(limit).all()
 
 
 def get_user(db: Session, user_id: int):

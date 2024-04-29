@@ -57,7 +57,6 @@ class Processo(ProcessoBase):
     class Config:
         orm_mode = True
 
-
 class DefeitoBase(BaseModel):
     id: int
     descricao: str 
@@ -126,6 +125,28 @@ class Status(StatusBase):
         orm_mode = True
 
 
+class ProdutoBase(BaseModel):
+    id: str 
+    descricao: str 
+    narrativa: str
+    unidade: str 
+    descricao_especifica: str 
+    grupo: str 
+    cod_barras: str 
+    tipo: str 
+    
+class ProdutoCreate(ProdutoBase):
+    pass
+
+class Produto(BaseModel):
+    id: str 
+    descricao: str 
+    grupo: str 
+    cod_barras: str 
+    tipo: str 
+
+    class Config:
+        orm_mode = True
 
 
 

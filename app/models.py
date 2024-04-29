@@ -75,7 +75,17 @@ class ProdDefeito(Base):
     bipagem: str = Column("td01_bipagem", String)
     grupo_defeito_id: int = Column("td01_grupo_defeito_id", Integer)
  
-  
+class Produto(Base):
+    __tablename__ = 'ts01_produto'
+    id: str = Column("ts01_codigo", String,  primary_key=True, nullable=False) 
+    descricao: str = Column("ts01_descricao", String) 
+    narrativa: str = Column("ts01_narrativa",String)
+    unidade: str = Column("ts01_unidade",String)
+    descricao_especifica: str = Column("ts01_desc_esp",String)
+    grupo: str = Column("ts01_grupo",String)
+    cod_barras: str = Column("ts01_cod_barras",String)
+    tipo: str = Column("td01_tipo",String) 
+    
 class Post(Base):
     __tablename__ = 'posts'
     id =  Column(Integer, primary_key=True, nullable=False)
