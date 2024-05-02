@@ -39,6 +39,17 @@ def get_produto(db: Session, produto_id: str):
 def get_produtos(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Produto).offset(skip).limit(limit).all()
 
+def get_usuario(db: Session, usuario_id: str):
+    return db.query(models.Usuario).filter(models.Usuario.re == usuario_id).first()
+
+def get_usuarios(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Usuario).offset(skip).limit(limit).all()
+
+def get_grupo(db: Session, grupo_id: str):
+    return db.query(models.Grupo).filter(models.Grupo.id == grupo_id).first()
+
+def get_grupos(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Grupo).offset(skip).limit(limit).all()
 
 def get_user(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()

@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Time, DateTime, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Double, Time, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 
 import datetime, time
@@ -85,6 +85,29 @@ class Produto(Base):
     grupo: str = Column("ts01_grupo",String)
     cod_barras: str = Column("ts01_cod_barras",String)
     tipo: str = Column("td01_tipo",String) 
+ 
+class Usuario(Base):   
+    __tablename__ = 'ts01_usuario'
+    re: str = Column("re", String,  primary_key=True,nullable=False)
+    usuario: str = Column("usuario", String)
+    senha: str = Column("senha", String)
+    nome: str = Column("nome", String)
+    status:str = Column("status", String, default="A")
+    perfil: str = Column("perfil", String)
+    local: str = Column("local", String)
+   
+    
+class Grupo(Base):
+    __tablename__ = "ts01_grupo"
+    grupo: str = Column("ts01_grupo", String, primary_key=True,nullable=False)
+    desc_grupo: str = Column("ts01_descgrupo", String)
+    desc_brev: str = Column("ts01_descbrevgrupo")
+    nivel: float = Column("ts01_nivel")
+    cmplx: str = Column("ts01_cmplx", String)
+    tpad_cq: str = Column("ts01_tpad_cq", Double, default=0.25)
+    tpad_lab : float = Column("ts01_tpad_lab", Double, default=0.25)
+    tpad_prod : float = Column("ts01_tpad_prod", Double, default=0.25)
+    nqa : float = Column("ts01_nqa", Double, default=0.25)   
     
 class Post(Base):
     __tablename__ = 'posts'

@@ -149,10 +149,52 @@ class Produto(BaseModel):
         orm_mode = True
 
 
+class UsuarioBase(BaseModel):   
+    re: str 
+    usuario: str 
+    senha: str 
+    nome: str 
+    status:str 
+    perfil: str 
+    local: str 
+    
+class UsuarioCriate(UsuarioBase):
+    pass
 
+class Usuario(UsuarioBase):
+    re: str 
+    usuario: str 
+    senha: str 
+    nome: str 
+    
+    class Config:
+        orm_mode = True
 
+class GrupoBase(BaseModel):
+    grupo: str 
+    desc_grupo: str 
+    desc_brev: str 
+    nivel: float
+    ts01_cmplx: str
+    ts01_tpad_cq: float | None = None
+    ts01_tpad_lab : float | None = None
+    ts01_tpad_prod : float | None = None
+    ts01_nqa : float | None = None
+    
+class GrupoCreate(GrupoBase):
+    pass
 
-
+class Grupo(GrupoBase):
+    grupo: str 
+    desc_grupo: str 
+    desc_brev: str 
+    ts01_tpad_cq: float | None = None
+    ts01_tpad_lab : float | None = None
+    ts01_tpad_prod : float | None = None
+    ts01_nqa : float | None = None
+    
+    class Config:
+        orm_mode = True
 
 class ItemBase(BaseModel):
     title: str

@@ -103,6 +103,32 @@ def read_produto(produto_id: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Produto não encontrado")
     return db_produto
 
+@app.get("/usuario/", response_model=list[schemas.Usuario])
+def read_usuarios(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    usuarios = crud.get_usuarios(db, skip=skip, limit=limit)
+    return usuarios
+
+@app.get("/usuario/{usuario_id}", response_model=schemas.Usuario)
+def read_usuario(usuario_id: str, db: Session = Depends(get_db)):
+    db_usuario = crud.get_usuario(db, usuario_id=usuario_id)
+    if db_usuario is None:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+    return db_usuario
+
+
+@app.get("/grupo/", response_model=list[schemas.Grupo])
+def read_grupos(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    grupos = crud.get_grupos(db, skip=skip, limit=limit)
+    return grupos
+
+@app.get("/grupo/{grupo_id}", response_model=schemas.Grupo)
+def read_grupo(grupo_id: str, db: Session = Depends(get_db)):
+    db_grupo = crud.get_grupo(db, grupo_id=grupo_id)
+    if db_grupo is None:
+        raise HTTPException(status_code=404, detail="Grupo não encontrado")
+    return db_grupo
+
+
 
 @app.post("/users/", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
